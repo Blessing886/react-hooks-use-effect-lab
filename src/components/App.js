@@ -10,14 +10,20 @@ function App() {
 
   function handleQuestionAnswered(correct) {
     if (currentQuestionId < questions.length) {
-      setCurrentQuestion((currentQuestionId) => currentQuestionId + 1);
+      setCurrentQuestion((prevId) => prevId + 1);
     } else {
       setCurrentQuestion(null);
     }
     if (correct) {
-      setScore((score) => score + 1);
+      setScore((prevScore) => prevScore + 1);
     }
   }
+  // Function to reset the quiz
+  const resetQuiz = () => {
+    setCurrentQuestion(1); // Reset to the first question
+    setScore(0); // Reset the score
+    setQuestions(quiz); // Reset the questions (in case you modify it later)
+  };
 
   return (
     <main>
@@ -31,6 +37,7 @@ function App() {
           <>
             <h1>Game Over</h1>
             <h2>Total Correct: {score}</h2>
+            <button onClick={resetQuiz}>Play Again</button>
           </>
         )}
       </section>
